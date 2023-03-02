@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    tools {
+        maven 'MAVAN'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'hello world'
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/madhusudan101/Operative-test.git']])
+                sh "mvn -Dmaven.test,failure.ignore=true clean package"
+            }
+        }
+    }
+    post {
+        always {
+            junit(
+                allowEmptyResults:true,
+                testResults: '*test-reports/.xml'
+                )
+            
+        }
+    }
+}
