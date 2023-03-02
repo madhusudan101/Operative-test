@@ -1,11 +1,9 @@
 pipeline {
     agent any
-
     tools {
         maven "MAVEN"
         jdk "JDK"
     }
-
     stages {
         stage('Initialize'){
             steps{
@@ -25,8 +23,7 @@ pipeline {
     post {
        always {
           junit(
-        allowEmptyResults: true,
-        testResults: '*/test-reports/.xml'
+        allowEmptyResults: true,testResults: '*/test-reports/.xml'
       )
       }
    } 
