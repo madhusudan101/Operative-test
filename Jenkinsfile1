@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'hello world'
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/madhusudan101/Operative-test.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'git-new', url: 'https://github.com/madhusudan101/Operative-test']])
                 sh "mvn -Dmaven.test,failure.ignore=true clean package"
             }
         }
